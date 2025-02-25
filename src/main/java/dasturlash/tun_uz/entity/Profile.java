@@ -31,7 +31,7 @@ public class Profile {
     @Column(nullable = false)
     String email;
 
-    @Column(nullable = false)
+    @Column
     String phone;
 
     @Column(nullable = false)
@@ -50,7 +50,7 @@ public class Profile {
     @Column(nullable = false)
     LocalDateTime  createdDate;
 
-    @Column(nullable = false)
+    @Column
     String photoId;
 
 }
