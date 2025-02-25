@@ -12,7 +12,8 @@ public record RegistrationDTO(
                 regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$&_]).{8,}$",
                 message = "The password must be at least 8 characters long and contain uppercase, lowercase, numbers, and special characters (@$&_)"
         )
-        String password
+        String password,
+        String photoId
 
 ) {
 }
