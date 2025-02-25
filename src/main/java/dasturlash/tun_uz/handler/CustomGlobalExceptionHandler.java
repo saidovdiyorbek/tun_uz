@@ -18,6 +18,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
                                                                   HttpHeaders headers,
                                                                   HttpStatusCode status,
                                                                   WebRequest request) {
+
         Map<String, Object> body = new HashMap<>();
         body.put("timestamp", new Date());
         body.put("status", status.value());
