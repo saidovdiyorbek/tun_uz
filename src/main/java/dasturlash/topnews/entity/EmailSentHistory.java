@@ -1,4 +1,4 @@
-package dasturlash.tun_uz.entity;
+package dasturlash.topnews.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
