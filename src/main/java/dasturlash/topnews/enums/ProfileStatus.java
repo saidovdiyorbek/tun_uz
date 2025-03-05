@@ -1,4 +1,4 @@
-package dasturlash.tun_uz.enums;
+package dasturlash.topnews.enums;
 
 public enum ProfileStatus {
     ACTIVE,
