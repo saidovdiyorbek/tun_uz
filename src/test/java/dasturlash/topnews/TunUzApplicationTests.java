@@ -1,4 +1,4 @@
-package dasturlash.tun_uz;
+package dasturlash.topnews;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

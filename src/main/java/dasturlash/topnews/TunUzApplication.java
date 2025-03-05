@@ -1,4 +1,4 @@
-package dasturlash.tun_uz;
+package dasturlash.topnews;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
