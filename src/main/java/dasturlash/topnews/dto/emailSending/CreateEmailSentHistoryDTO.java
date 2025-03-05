@@ -1,4 +1,4 @@
-package dasturlash.tun_uz.dto.emailSending;
+package dasturlash.topnews.dto.emailSending;
 
 import javax.validation.constraints.Email;
 
