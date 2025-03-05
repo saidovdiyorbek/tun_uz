@@ -1,7 +1,6 @@
-package dasturlash.tun_uz.util.random;
+package dasturlash.topnews.util.random;
 
 import java.security.SecureRandom;
-import java.util.Random;
 
 public class RandomUtil {
 
