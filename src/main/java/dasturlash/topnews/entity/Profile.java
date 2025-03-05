@@ -1,6 +1,6 @@
-package dasturlash.tun_uz.entity;
+package dasturlash.topnews.entity;
 
-import dasturlash.tun_uz.enums.ProfileStatus;
+import dasturlash.topnews.enums.ProfileStatus;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
