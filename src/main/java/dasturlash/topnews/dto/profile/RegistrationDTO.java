@@ -1,4 +1,4 @@
-package dasturlash.tun_uz.dto.profile;
+package dasturlash.topnews.dto.profile;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
