@@ -1,8 +1,9 @@
-package dasturlash.tun_uz.service.emailService;
+package dasturlash.topnews.service.emailService;
 
-import dasturlash.tun_uz.dto.emailSending.CreateEmailSentHistoryDTO;
-import dasturlash.tun_uz.entity.EmailSentHistory;
-import dasturlash.tun_uz.repository.EmailSentHistoryRepository;
+import dasturlash.topnews.dto.StandardResponse;
+import dasturlash.topnews.dto.emailSending.CreateEmailSentHistoryDTO;
+import dasturlash.topnews.entity.EmailSentHistory;
+import dasturlash.topnews.repository.EmailSentHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,14 @@ public class EmailSentHistoryService {
         emailSentHistory.setExpiredDate(LocalDateTime.now().plusMinutes(3));
         emailSentHistory.setExpired(false);
         repository.save(emailSentHistory);
+    }
+
+    public StandardResponse checkCode(int code){
+        EmailSentHistory byCode = repository.findByCode(code);
+        if(byCode != null && byCode.getExpiredDate().isAfter(LocalDateTime.now())){
+            byCode.setExpired(true);
+            return new StandardResponse(byCode.getEmail(), true, byCode);
+        }
+        return new StandardResponse("Code expired", false, byCode);
     }
 }
