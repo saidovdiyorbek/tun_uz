@@ -30,7 +30,14 @@ public class AuthService {
 
     public String registration(RegistrationDTO dto, AppLanguage lang) {
         ProfileStatus profileStatus = profileService.checkInRegistration(dto.username());
-        if (profileStatus == ProfileStatus.IN_REGISTRATION) {
+
+        if (profileStatus != null && profileStatus.equals(ProfileStatus.IN_REGISTRATION)) {
+            //code tekshirilayapti expiredi, muddati otmagan bolsa shunchaki xabar jonatiladi
+            boolean exists = emailSentHistoryService.checkAndChangeExpire(dto.username());
+            if (!exists){
+                return resourceBundleService.getMessage("already.registration", lang);
+            }
+            //true qaytadi code expired bolgan qayta code jonatvoramiz
             emailSendingService.sendRegistrationEmail(dto.username(), lang);
             return resourceBundleService.getMessage("sent.email", lang);
         }
@@ -40,7 +47,7 @@ public class AuthService {
         }
         profileService.createNewProfileNotExists(dto);
         emailSendingService.sendRegistrationEmail(dto.username(), lang);
-        return resourceBundleService.getMessage("registration.success", lang);
+        return resourceBundleService.getMessage("sent.email", lang);
     }
 
     public String verification(int code/*, AppLanguage lang*/) {
