@@ -31,40 +31,38 @@ public class EmailSendingService {
         String subject = "Registration Successfully!";
         String language = lang.name();
         int randomCode = RandomUtil.getRandomCode();
-        String body = String.format("""
-        <!DOCTYPE html>
-        <html lang="%s">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="Content-Language" content="%s">
-            <meta name="language" content="%s">
-            <title>Title</title>
-            <style>
-                a {
-                    padding: 10px 30px;
-                    display: inline-block;
-                }
-                .button-link {
-                    text-decoration: none;
-                    color: white;
-                    background-color: indianred;
-                }
-                .button-link:hover {
-                    background-color: #dd4444;
-                }
-            </style>
-        </head>
-        <body>
-            <h1>Complete Registration</h1>
-            <p>
-                Please click to button link for completing registration:
-                <a class="button-link" href="http://"%s"/api/auth/verification/%d" target="_blank">
-                    Click there
-                </a>
-            </p>
-        </body>
-        </html>
-        """, language, language, language,serverPort,randomCode);
+        String body = "<!DOCTYPE html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <title>Title</title>\n" +
+                "    <style>\n" +
+                "        a {\n" +
+                "            padding: 10px 30px;\n" +
+                "            display: inline-block;\n" +
+                "        }\n" +
+                "\n" +
+                "\n" +
+                "        .button-link {\n" +
+                "            text-decoration: none;\n" +
+                "            color: white;\n" +
+                "            background-color: indianred;\n" +
+                "        }\n" +
+                "\n" +
+                "        .button-link:hover {\n" +
+                "            background-color: #dd4444;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<h1>Complete Registration</h1>\n" +
+                "<p>\n" +
+                "    Please click to button link for completing registration:<a class=\"button-link\"\n" +
+                "        href=\"http://localhost:"+serverPort+"/api/auth/verification/%d\" target=\"_blank\">Click there</a>\n" +
+                "</p>\n" +
+                "</body>\n" +
+                "</html>";
+        body = String.format(body, randomCode);
         sendMimeEmail(email, subject, body);
         //kimga qaysi code ketganligin yaratish
         CreateEmailSentHistoryDTO dto = new CreateEmailSentHistoryDTO(email, randomCode);
