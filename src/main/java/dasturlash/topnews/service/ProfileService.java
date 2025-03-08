@@ -62,10 +62,11 @@ public class ProfileService {
             //oldin royxatdan otgan in_registration state da, qayta code jonatamiz
             return ProfileStatus.IN_REGISTRATION;
         }
-        //endi royxatdan otayapdi
+        //Active user response already exists email
         if (inRegistrationProfile != null && inRegistrationProfile.getStatus().equals(ProfileStatus.ACTIVE)) {
             return ProfileStatus.ACTIVE;
         }
+        //endi royxatdan otayapdi
         return null;
     }
 }
