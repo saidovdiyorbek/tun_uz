@@ -1,7 +1,11 @@
 package dasturlash.topnews.dto.profile;
 
+import dasturlash.topnews.dto.PhotoResponse;
+
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 public record RegistrationDTO(
         String name,
@@ -16,4 +20,17 @@ public record RegistrationDTO(
         String photoId
 
 ) {
+        public record LoginDTO(
+                @Email(message = "Invalid email address")
+                String email,
+                String password
+        ) {
+                public record LoginResponse(
+                        String name,
+                        String surname,
+                        String username,
+                        List<String> roles,
+                        PhotoResponse infoPhoto
+                ){}
+        }
 }
