@@ -5,6 +5,8 @@ import dasturlash.topnews.enums.Role;
 import dasturlash.topnews.repository.ProfileRoleEntityRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class ProfileRoleEntityService {
     private final ProfileRoleEntityRepository profileRoleEntityRepository;
@@ -17,6 +19,7 @@ public class ProfileRoleEntityService {
         ProfileRoleEntity profileRoleEntity = new ProfileRoleEntity();
         profileRoleEntity.setProfileId(profileId);
         profileRoleEntity.setRole(role);
+        profileRoleEntity.setCreatedDate(LocalDateTime.now());
         profileRoleEntityRepository.save(profileRoleEntity);
     }
 }
