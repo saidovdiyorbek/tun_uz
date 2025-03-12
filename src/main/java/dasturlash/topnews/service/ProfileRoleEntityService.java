@@ -6,6 +6,7 @@ import dasturlash.topnews.repository.ProfileRoleEntityRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ProfileRoleEntityService {
@@ -21,5 +22,9 @@ public class ProfileRoleEntityService {
         profileRoleEntity.setRole(role);
         profileRoleEntity.setCreatedDate(LocalDateTime.now());
         profileRoleEntityRepository.save(profileRoleEntity);
+    }
+
+    public List<String> getRolesByProfileId(Integer profileId) {
+        return profileRoleEntityRepository.getRolesByProfileId(profileId);
     }
 }
