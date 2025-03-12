@@ -1,5 +1,6 @@
 package dasturlash.topnews.handler;
 
+import dasturlash.topnews.exceptions.AppBadException;
 import dasturlash.topnews.exceptions.CheckVerificationCodeException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
@@ -41,6 +42,11 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
         @ExceptionHandler(UsernameNotFoundException.class)
         public ResponseEntity<Object> exceptionHandler(UsernameNotFoundException e) {
+            return ResponseEntity.status(400).body(e.getMessage());
+        }
+
+        @ExceptionHandler(AppBadException.class)
+        public ResponseEntity<Object> exceptionHandler(AppBadException e) {
             return ResponseEntity.status(400).body(e.getMessage());
         }
 }
