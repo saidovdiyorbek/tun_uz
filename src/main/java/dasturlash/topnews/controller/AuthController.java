@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/v1/t/auth")
 public class AuthController {
     private final AuthService authService;
 
@@ -23,6 +23,12 @@ public class AuthController {
     public ResponseEntity<String> register(@RequestBody @Valid RegistrationDTO dto,
                                            @RequestHeader(value = "Accept-Language", defaultValue = "UZ")AppLanguage lang) {
         return ResponseEntity.ok(authService.registration(dto, lang));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<RegistrationDTO.LoginDTO.LoginResponse> login(@RequestBody @Valid RegistrationDTO.LoginDTO dto,
+                                                                        @RequestHeader(value = "Accept-Language", defaultValue = "UZ") AppLanguage lang) {
+        return ResponseEntity.ok(authService.login(dto, lang));
     }
 
     @GetMapping("/verification/{code}")
