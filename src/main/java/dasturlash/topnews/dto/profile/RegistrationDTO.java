@@ -3,6 +3,7 @@ package dasturlash.topnews.dto.profile;
 import dasturlash.topnews.dto.PhotoResponse;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -23,6 +24,7 @@ public record RegistrationDTO(
         public record LoginDTO(
                 @Email(message = "Invalid email address")
                 String email,
+                @NotBlank
                 String password
         ) {
                 public record LoginResponse(
