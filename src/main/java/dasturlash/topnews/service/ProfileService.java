@@ -1,9 +1,11 @@
 package dasturlash.topnews.service;
 
+import dasturlash.topnews.config.MD5PasswordEncoder;
 import dasturlash.topnews.dto.profile.RegistrationDTO;
 import dasturlash.topnews.entity.Profile;
 import dasturlash.topnews.enums.ProfileStatus;
 import dasturlash.topnews.enums.Role;
+import dasturlash.topnews.exceptions.AppBadException;
 import dasturlash.topnews.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -31,7 +33,7 @@ public class ProfileService {
         profile.setName(dto.name());
         profile.setSurname(dto.surname());
         profile.setEmail(dto.username());
-        profile.setPassword(bCryptPasswordEncoder.encode(dto.password()));
+        profile.setPassword(new MD5PasswordEncoder().encode(dto.password()));
         profile.setPhotoId(dto.photoId());
 
         //def
@@ -68,5 +70,11 @@ public class ProfileService {
         }
         //endi royxatdan otayapdi
         return null;
+    }
+
+    public Profile getById(Integer profileId){
+        return profileRepository.findByIdAndVisibleTrue(profileId).orElseThrow(() ->{
+            throw new AppBadException("Profile Not Found");
+        });
     }
 }
