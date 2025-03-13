@@ -29,6 +29,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final ProfileRoleEntityService  profileRoleEntityService;
     private final AttachService  attachService;
+    private final JwtUtil jwtUtil;
 
     @Autowired
     public AuthService(EmailSendingService emailSendingService,
@@ -37,7 +38,8 @@ public class AuthService {
                        ProfileService profileService,
                        AuthenticationManager authenticationManager,
                        ProfileRoleEntityService profileRoleEntityService,
-                       AttachService attachService) {
+                       AttachService attachService,
+                       JwtUtil jwtUtil) {
         this.emailSendingService = emailSendingService;
         this.emailSentHistoryService = emailSentHistoryService;
         this.resourceBundleService = resourceBundleService;
@@ -45,6 +47,7 @@ public class AuthService {
         this.authenticationManager = authenticationManager;
         this.profileRoleEntityService = profileRoleEntityService;
         this.attachService = attachService;
+        this.jwtUtil = jwtUtil;
     }
 
     public String registration(RegistrationDTO dto, AppLanguage lang) {
@@ -86,7 +89,7 @@ public class AuthService {
                     new UsernamePasswordAuthenticationToken(dto.email(), dto.password()));
             if (authentication.isAuthenticated()) {
                 CustomUserDetails profile = (CustomUserDetails) authentication.getPrincipal();
-                String token = JwtUtil.encode(profile.getUsername(), profile.getId(), profile.getRole());
+                String token = jwtUtil.encode(profile.getUsername(), profile.getId(), profile.getRole());
 
                 List<String> profileRoles = profileRoleEntityService.getRolesByProfileId(profile.getId());
                 Profile currentUser = profileService.getById(profile.getId());
@@ -94,7 +97,7 @@ public class AuthService {
                 attachService.openUrl(currentUser.getPhotoId());
                 PhotoResponse photoResponse = new PhotoResponse(currentUser.getPhotoId(), attachService.openUrl(currentUser.getPhotoId()));
 
-                return new RegistrationDTO.LoginDTO.LoginResponse(profile.getName(), currentUser.getSurname(), profile.getUsername(), profileRoles, photoResponse);
+                return new RegistrationDTO.LoginDTO.LoginResponse(profile.getName(), currentUser.getSurname(), profile.getUsername(), profileRoles, photoResponse,token);
             }
             throw new AppBadException("Invalid email or password");
         }catch (BadCredentialsException e){
