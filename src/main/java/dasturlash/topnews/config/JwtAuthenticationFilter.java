@@ -23,9 +23,13 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final UserDetailsService userDetailsService;
+    private final JwtUtil jwtUtil;
 
-    public JwtAuthenticationFilter(UserDetailsService userDetailsService) {
+
+    public JwtAuthenticationFilter(UserDetailsService userDetailsService,
+                                   JwtUtil jwtUtil) {
         this.userDetailsService = userDetailsService;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
@@ -41,7 +45,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         try {
             final String token = header.substring(7).trim();
-            JwtDTO dto = JwtUtil.decode(token);
+            JwtDTO dto = jwtUtil.decode(token);
 
             String username = dto.username();
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
