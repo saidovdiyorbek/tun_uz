@@ -32,7 +32,8 @@ public record RegistrationDTO(
                         String surname,
                         String username,
                         List<String> roles,
-                        PhotoResponse infoPhoto
+                        PhotoResponse infoPhoto,
+                        String jwtToken
                 ){}
         }
 }
